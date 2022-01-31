@@ -17,6 +17,11 @@ server.use(express.json())
 server.use(helmet())
 server.use(cors())
 
+server.get('/', async (req, res) => {
+  res.json({message: "SERVER RUNNING"})
+})
+
+
 server.get('/api/users', async (req, res) => {
   res.json(await getAllUsers())
 })
