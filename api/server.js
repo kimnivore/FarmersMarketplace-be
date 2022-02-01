@@ -1,36 +1,21 @@
-const express = require('express')
-const helmet = require('helmet')
-const cors = require('cors')
-const db = require('./data/db-config')
-const authRouter = require("./auth/auth-router")
+const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
+const authRouter = require("./auth/auth-router");
 
-function getAllUsers() { return db('users') }
+const server = express();
+server.use(express.json());
+server.use(helmet());
+server.use(cors());
 
-async function insertUser(user) {
-  // WITH POSTGRES WE CAN PASS A "RETURNING ARRAY" AS 2ND ARGUMENT TO knex.insert/update
-  // AND OBTAIN WHATEVER COLUMNS WE NEED FROM THE NEWLY CREATED/UPDATED RECORD
-  const [newUserObject] = await db('users').insert(user, ['user_id', 'username', 'password'])
-  return newUserObject // { user_id: 7, username: 'foo', password: 'xxxxxxx' }
-}
+server.use("/api/auth", authRouter);
 
-const server = express()
-server.use(express.json())
-server.use(helmet())
-server.use(cors())
+server.get("/", async (req, res) => {
+  res.json({ message: "DUMMY GET REQUEST" });
+});
 
-server.use('/api/auth', authRouter)
+server.post("/", async (req, res) => {
+  res.json({ message: "DUMMY POST REQUEST" });
+});
 
-server.get('/', async (req, res) => {
-  res.json({message: "SERVER RUNNING"})
-})
-
-
-server.get('/api/users', async (req, res) => {
-  res.json(await getAllUsers())
-})
-
-server.post('/api/users', async (req, res) => {
-  res.status(201).json(await insertUser(req.body))
-})
-
-module.exports = server
+module.exports = server;

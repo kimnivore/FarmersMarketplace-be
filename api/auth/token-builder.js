@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../secrets/index')
 
-module.exports = function biuldToken(user) {
+module.exports = function buildToken(user) {
 	const payload = {
 		subject: user.user_id,
 		username: user.username,

@@ -1,5 +1,6 @@
 const User = require('../users/users-model')
 
+// NOT USING CURRENTLY
 
 const checkUsernameTaken = async (req, res, next) => {
     try{
