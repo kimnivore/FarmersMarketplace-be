@@ -1,5 +1,15 @@
-# Build Week Scaffolding
+# <p>Backend For African Marketplace 01</P>
 
-African Marketplace Backend
 
-Deploy Link: https://backend-african-marketplace.herokuapp.com/
+## <p>https://backend-african-marketplace.herokuapp.com/</p>
+
+## DUMMY ENDPOINT
+
+### `[GET] /`
+
+_Response_
+```json
+{
+  "message": "SERVER RUNNING"
+}
+```
