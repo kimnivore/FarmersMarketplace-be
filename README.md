@@ -10,6 +10,16 @@
 _Response_
 ```json
 {
-  "message": "SERVER RUNNING"
+  "message": "DUMMY GET REQUEST"
 }
 ```
+
+### `[POST] /`
+
+_Response_
+```json
+{
+  "message": "DUMMY POST REQUEST"
+}
+```
+
