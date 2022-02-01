@@ -4,15 +4,13 @@ const bcrypt = require("bcryptjs");
 const User = require("../users/users-model");
 const {
  checkUsernameExists,
- validateRoleName,
- checkUsernameTaken,
+ checkUsernameTaken
 } = require("../auth/auth-middleware");
 
 
 router.post(
     "/register",
     checkUsernameTaken,
-    validateRoleName,
     (req, res, next) => {
      const { username, password } = req.body;
      const hash = bcrypt.hashSync(password, 8);
@@ -22,7 +20,6 @@ router.post(
       })
       .catch(next);
    
-    
     },
     );
     
