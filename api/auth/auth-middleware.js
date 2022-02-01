@@ -1,6 +1,6 @@
 const User = require('../users/users-model')
 
-// NOT USING CURRENTLY
+// NOT USING ANY CURRENTLY, FUNCTIONS NEED TO BE FIXED
 
 const checkUsernameTaken = async (req, res, next) => {
     try{
