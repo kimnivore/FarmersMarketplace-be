@@ -71,7 +71,7 @@ _Server Response_
   "user_id": "2",
   "username": "user2",
 }
-etc...
+"etc..."
 ```
 
 <hr>
