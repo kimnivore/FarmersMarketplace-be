@@ -3,7 +3,7 @@ const User = require('../users/users-model')
 
 async function checkUsernameTaken(req, res, next) {
   const [user] = await User.findBy({ username: req.body.username });
-  if (user) {
+  if (user.length) {
    next({
     status: 422,
     message: "Username taken",
@@ -13,14 +13,13 @@ async function checkUsernameTaken(req, res, next) {
   }
  }
 
-
 const checkUsernameExists = async (req, res, next) => {
   
     try{
       const users = await User.findBy({ username: req.body.username })
       if(!users){
         next({
-          status: 422,
+          status: 401,
           message: 'Invalid credentials'
         })
       }else{
