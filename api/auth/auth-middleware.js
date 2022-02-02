@@ -1,6 +1,6 @@
 const User = require('../users/users-model')
 
-// NOT USING ANY CURRENTLY, FUNCTIONS NEED TO BE FIXED
+
 
 const checkUsernameTaken = async (req, res, next) => {
     try{
@@ -20,18 +20,24 @@ const checkUsernameTaken = async (req, res, next) => {
 }
 
 
-async function checkUsernameExists(req, res, next) {
+const checkUsernameExists = async (req, res, next) => {
   
     try{
       const users = await User.findBy({ username: req.body.username })
-      if (!users.length) {
+      if(!users){
+        next({
+          status: 422,
+          message: 'Invalid credentials'
+        })
+      }else{
+        req.user = users
         next()
       }
-      else next({ message: "Invalid credentials", status: 422 })
-    } catch (error){
-      next(error)
+    }catch(err){
+      next(err)
     }
-  }
+}
+
   
 
 

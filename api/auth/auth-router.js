@@ -3,10 +3,10 @@ const tokenBuilder = require("./token-builder");
 const bcrypt = require("bcryptjs");
 const User = require("../users/users-model");
 const { BCRYPT_ROUNDS } = require("../secrets/index");
-// TO DO: IMPORT AND USE MIDDLEWARE
+const {checkUsernameTaken,checkUsernameExists} = require('../auth/auth-middleware')
 
 
-router.post("/register", (req, res, next) => {
+router.post("/register",checkUsernameTaken, (req, res, next) => {
   const { username, password } = req.body;
   const hash = bcrypt.hashSync(password, BCRYPT_ROUNDS);
   User.add({ username, password: hash })
@@ -19,7 +19,7 @@ router.post("/register", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/login", async (req, res, next) => {
+router.post("/login",checkUsernameExists, async (req, res, next) => {
   const [user] = await User.findBy({ username: req.body.username });
 
   if (user && bcrypt.compareSync(req.body.password, user.password)) {
