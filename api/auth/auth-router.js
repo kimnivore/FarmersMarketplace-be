@@ -6,7 +6,7 @@ const { BCRYPT_ROUNDS } = require("../secrets/index");
 const {checkUsernameTaken,checkUsernameExists} = require('../auth/auth-middleware')
 
 
-router.post("/register",checkUsernameTaken, (req, res, next) => {
+router.post("/register", checkUsernameTaken, (req, res, next) => {
   const { username, password } = req.body;
   const hash = bcrypt.hashSync(password, BCRYPT_ROUNDS);
   User.add({ username, password: hash })
@@ -19,9 +19,8 @@ router.post("/register",checkUsernameTaken, (req, res, next) => {
     .catch(next);
 });
 
-router.post("/login",checkUsernameExists, async (req, res, next) => {
-  const [user] = await User.findBy({ username: req.body.username });
-
+router.post("/login", checkUsernameExists, async (req, res, next) => {
+  const user = req.user;
   if (user && bcrypt.compareSync(req.body.password, user.password)) {
     const token = tokenBuilder(user);
     res.status(200).json({ message: `Welcome, ${user.username}`, token });
