@@ -32,8 +32,6 @@ const checkUsernameExists = async (req, res, next) => {
     }
 }
 
-  
-
 
 module.exports = { checkUsernameTaken, checkUsernameExists
 };
