@@ -1,6 +1,5 @@
 # <p>Backend For African Marketplace 01</P>
 
-
 ## <p>https://backend-african-marketplace.herokuapp.com/</p>
 
 ## REGISTER and LOGIN ENDPOINTS
@@ -12,13 +11,16 @@
   - _password required_
 
 _What You Send_
+
 ```json
 {
   "username": "john",
   "password": "12345"
 }
 ```
+
 _Server Response_
+
 ```json
 {
   "message": "Successfully registered john!",
@@ -33,6 +35,7 @@ _Server Response_
   - _password required_
 
 _What You Send_
+
 ```json
 {
   "username": "john",
@@ -41,27 +44,28 @@ _What You Send_
 ```
 
 _Server Response_
+
 ```json
 {
   "message": "Welcome, john!",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ikpva",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ikpva"
 }
 ```
 
 <p>You will use the token given by the server for authentication.</p>
 
-
 <p>Credential you can use for login testing:</p>
 
-- ```username: sam, password: 1234```
+- `username: sam, password: 1234`
 
-- ```username: frodo, password: 5678```
+- `username: frodo, password: 5678`
 
 ### `[GET] /api/auth/users`
 
 - Returns all users in database, currently public facing but will be restricted.
 
 _Server Response_
+
 ```json
 {
   "user_id": "1",
@@ -78,5 +82,32 @@ _Server Response_
 
 ## ITEMS ENDPOINTS
 
+### `[GET] /api/items/`
 
-Pending...
+- Returns array of all items in the database.
+- 3 sample items have been added.
+
+_Server Response_
+
+```json
+[   {
+        "item_id": 1,
+        "item_name": "Rice",
+        "item_description": "Locally grown long grain rice.",
+        "item_price": 7.99,
+        "item_category": "Grains",
+        "user_id": 1
+    },
+    {
+        "item_id": 2,
+        "item_name": "Bananas",
+        "item_description": "Locally grown bananas.",
+        "item_price": 12.99,
+        "item_category": "Fruits",
+        "user_id": 2
+    }
+    "etc..."
+
+]
+
+```
