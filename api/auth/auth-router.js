@@ -3,7 +3,8 @@ const tokenBuilder = require("./token-builder");
 const bcrypt = require("bcryptjs");
 const User = require("../users/users-model");
 const { BCRYPT_ROUNDS } = require("../secrets/index");
-const {checkUsernameTaken,checkUsernameExists} = require('../auth/auth-middleware')
+const {checkUsernameTaken,checkUsernameExists, restricted} = require('../auth/auth-middleware')
+
 
 
 router.post("/register", checkUsernameTaken, (req, res, next) => {
@@ -23,13 +24,16 @@ router.post("/login", checkUsernameExists, async (req, res, next) => {
   const user = req.user;
   if (user && bcrypt.compareSync(req.body.password, user.password)) {
     const token = tokenBuilder(user);
-    res.status(200).json({ message: `Welcome, ${user.username}`, token });
+    res.status(200).json({ 
+    message: `Welcome, ${user.username}`, 
+    token,
+    user_id: user.user_id });
   } else {
     next({ status: 401, message: "Invalid credentials" });
   }
 });
 
-router.get("/users", async (req, res) => {
+router.get("/users", restricted, async (req, res) => {
   res.json(await User.getAll());
 });
 

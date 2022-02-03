@@ -1,5 +1,22 @@
 const User = require('../users/users-model')
+const jwt = require('jsonwebtoken')
+const { JWT_SECRET } = require('../secrets/index')
 
+
+
+const restricted = (req, res, next) => {
+  const token = req.headers.authorization;
+  if (!token) {
+    return next({ status: 401, message: "Token required" });
+  }
+  jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+    if (err) {
+      return next({ status: 401, message: "token invalid" });
+    }
+    req.decodedToken = decodedToken;
+    return next();
+  });
+};
 
 async function checkUsernameTaken(req, res, next) {
   try {
@@ -34,5 +51,8 @@ const checkUsernameExists = async (req, res, next) => {
     }
 }
 
-module.exports = { checkUsernameTaken, checkUsernameExists
+module.exports = { 
+  checkUsernameTaken, 
+  checkUsernameExists,
+  restricted
 };

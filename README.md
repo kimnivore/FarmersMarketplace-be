@@ -48,19 +48,23 @@ _Server Response_
 ```json
 {
   "message": "Welcome, john!",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ikpva"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ikpva",
+  "user_id": 1
 }
 ```
 
 <p>You will use the token given by the server for authentication.</p>
+<p>User ID should also be stored as this will be required in the header when adding items.</p>
 
-<p>Credential you can use for login testing:</p>
+<p>Sample Credentials you can use for login testing:</p>
 
 - `username: sam, password: 1234`
 
 - `username: frodo, password: 5678`
 
 ### `[GET] /api/auth/users`
+
+**_RESTRICTED ENDPOINT_** (token required)
 
 - Returns all users in database, currently public facing but will be restricted.
 
@@ -83,6 +87,8 @@ _Server Response_
 ## ITEMS ENDPOINTS
 
 ### `[GET] /api/items/`
+
+**_RESTRICTED ENDPOINT_** (token required)
 
 - Returns array of all items in the database.
 - 3 sample items have been added.
@@ -111,5 +117,34 @@ _Server Response_
 ```
 ### `[POST] /api/items/`
 
-**Pending..**
+**_RESTRICTED ENDPOINT_** (token AND user_id required)
 
+- Adds a new item in the database. 
+  - **required information:**
+  - _item_name (string)_
+  - _item_description (string)_
+  - _item_price (float)_
+  - _item_category (string)_
+
+_What You Send:_
+
+```json
+{
+  "item_name": "Rice",
+  "item_description": "Locally grown rice",
+  "item_price": 7.99,
+  "item_category": "Grains"
+}
+```
+
+_Server Response:_
+
+```json
+{
+  "item_name": "Rice",
+  "item_description": "Locally grown rice",
+  "item_price": 7.99,
+  "item_category": "Grains",
+  "user_id": 1
+}
+```
