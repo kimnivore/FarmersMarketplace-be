@@ -148,3 +148,67 @@ _Server Response:_
   "user_id": 1
 }
 ```
+
+### `[GET] /api/items/:item_id`
+
+**_RESTRICTED ENDPOINT_** (token required)
+
+- Returns the single item associated with that item id. 
+
+_Server Response:_
+
+```json
+{
+  "item_id": 1,
+  "item_name": "Rice",
+  "item_description": "Locally grown rice",
+  "item_price": 7.99,
+  "item_category": "Grains",
+  "user_id": 1
+}
+```
+
+### `[GET] /api/items/user/:user_id`
+
+**_RESTRICTED ENDPOINT_** (token required)
+
+- Returns all items added by a user with provided user id. 
+
+_Server Response:_
+
+```json
+[   
+    {
+        "item_id": 1,
+        "item_name": "Rice",
+        "item_description": "Locally grown long grain rice.",
+        "item_price": 7.99,
+        "item_category": "Grains",
+        "user_id": 1
+    },
+    {
+        "item_id": 2,
+        "item_name": "Bananas",
+        "item_description": "Locally grown bananas.",
+        "item_price": 12.99,
+        "item_category": "Fruits",
+        "user_id": 1
+    }
+    "etc..."
+
+]
+```
+
+### `[DELETE] /api/items/:item_id`
+
+**_RESTRICTED ENDPOINT_** (token required)
+
+- Deletes the single item with provided item id.
+
+_Server Response:_
+
+```json
+{
+    "message": "Deleted 1 item."
+}
+```
