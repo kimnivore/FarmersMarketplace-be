@@ -109,3 +109,7 @@ _Server Response_
 ]
 
 ```
+### `[POST] /api/items/`
+
+**Pending..**
+

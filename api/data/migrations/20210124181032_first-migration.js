@@ -11,6 +11,14 @@ exports.up = async (knex) => {
       items.string("item_description", 128).notNullable();
       items.float("item_price").notNullable();
       items.string("item_category", 128).notNullable();
+      items
+        .integer("user_id")
+        .unsigned()
+        .notNullable()
+        .references("user_id")
+        .inTable("users")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
     });
 };
 
