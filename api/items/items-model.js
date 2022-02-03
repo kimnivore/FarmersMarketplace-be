@@ -13,9 +13,29 @@ async function addItem(item) {
       "user_id"
     ]);
     return newItem;
+}
+
+function getUserItems(user_id) {
+    return db("items").where("user_id", user_id);
   }
+
+function remove(item_id) {
+    return db('items').where({ item_id }).del();
+}
+
+function getById(id) {
+    return db("items").where("item_id", id).first();
+  }
+
+  
+
+
+
 
 module.exports = {
   getAllItems,
-  addItem
+  addItem, 
+  getUserItems,
+  remove,
+  getById
 };
