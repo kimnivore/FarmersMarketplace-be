@@ -60,5 +60,4 @@ test('[2] Returns correct error message when username already exists', async () 
     expect(res.status).toBe(401)
     expect(res.body.message).toMatch(/Invalid credentials/i);
   })
-
 })
